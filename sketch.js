@@ -1,57 +1,43 @@
-let img, canvas
-let w, h
+let img, canvas, w, h
 
-let imgWidth = 1080 / 2
-let imgHeight = 1080 / 2
-
-
+let scannerHead = 10;
 let driverX = 0
 let driverSpeed = 1;
 let stopAndGo = true
 
-
-
-let scannerHead = 5;
-
 function preload() {
-    img = loadImage('./img/img2.jpg')
+    img = loadImage('./img/img.jpg')
 }
 
 function setup() {
     canvas = createCanvas(1080, 1080)
-    background(125)
+    background(50)
     noCursor()
-    imageMode(CORNER)
-    rectMode(CENTER)
-
+    imageMode(CENTER)
+    img.loadPixels()
     w = width
     h = height
 }
 
-
-
-
 function draw() {
-    fill(125, 100, 0)
-    noStroke()
+    //map mouse position to move image for scanner
+    let imgWidthMap = map(mouseX, 0, w, 0, img.width)
+    let imgHeightMap = map(mouseY, 0, h, 0, img.height)
+    //copy loaded image on canvas
+    copy(img, imgWidthMap - 10, (imgHeightMap - 200) * -1, img.width, h / 1.5, driverX, 0, scannerHead, h)
 
-    copy(img, 0, h / 4, mouseX, mouseY, 0 + driverX, 0, scannerHead, h)
-
-
-
+    //increase driver for scanner head
     driverX += driverSpeed;
-
+    //reset scanner head to 0
     if (driverX >= w) {
         driverX = 0
     }
 }
 
 
-
-
 function keyPressed() {
 
-
+    //hit SPACEBAR to pause
     if (keyCode === 32) {
         stopAndGo = !stopAndGo
     }
@@ -65,10 +51,12 @@ function keyPressed() {
     }
 
 
+    //save canvas on ENTER
     if (keyCode == ENTER) {
         saveCanvas(canvas, 'myCanvas', 'jpg');
     }
 
+    //change scanner speed
     switch (key) {
         case '1':
             driverSpeed = 1;
