@@ -8,7 +8,8 @@ let stopAndGo = true
 let fps = 60
 
 function preload() {
-    img = loadImage('./img/coln3.jpg')
+
+    img = loadImage('./img/coln3.jpg')  //path to your image
 }
 
 function setup() {
