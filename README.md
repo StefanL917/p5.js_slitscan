@@ -4,4 +4,4 @@
 
 - move your mouse position to change the scanhead position
 - keys 1-5 change the speed of the scanner
-- spacebar pauses to scanner
+- spacebar pauses the scanner
